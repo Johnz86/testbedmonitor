@@ -22,9 +22,15 @@ grunt build
 You should have /testbedmonitor/dist/ folder now.
 
 Deploy the dist and server folder into your php server. In this way:
-```/testbedmonitor/dist/* > /srv/www/htdocs/testbedmonitor```
-```/testbedmonitor/server/status_json.php > /srv/www/htdocs/testbedmonitor/status_json.php```
-```/testbedmonitor/server/* > /srv/www/htdocs/testbedmonitor/scripts ```
+```
+/testbedmonitor/dist/* > /srv/www/htdocs/testbedmonitor
+```
+```
+/testbedmonitor/server/status_json.php > /srv/www/htdocs/testbedmonitor/status_json.php
+```
+```
+/testbedmonitor/server/* > /srv/www/htdocs/testbedmonitor/scripts
+```
 
 Check if the deployed keys match.
 
