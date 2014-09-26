@@ -1,0 +1,27 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="NavbarCtrl">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" ng-href="#/">Testbed Monitor</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <div class="form-group">
+                <input ng-model="query" class="form-control input-sm" placeholder="Search testbeds...">
+            </div>
+            <li ng-repeat="host in hosts | filter:query" ng-class="{active: isActive(host.hostname)}">
+                <a ng-href="#/testbeds/{{host.hostname}}"><span class="label pull-right {{ host.status == 'up.' && 'label-success' || 'label-danger'}}">{{host.status}}</span>{{host.hostname}}</a>
+            </li>
+        </ul>
+
+            <div class="navbar-text navbar-right hidden-xs">Made by <a href="mailto:jan.jakubcik.ext@siemens.com" class="navbar-link">Janci</a></div>
+
+    </div><!-- /.navbar-collapse -->
+</nav>

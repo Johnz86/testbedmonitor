@@ -1,0 +1,88 @@
+<div ng-include="'views/navbar.html'"></div>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Jenkins <small>(163.242.60.62)</small></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="breadcrumb">
+                <a ng-href="#/testbeds/{{testbedId}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-refresh"></i> Host Status</a>
+                <div class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ok"></i> up.</div>
+                <div class="pull-right col-md-4">
+                        <input ng-model="search" class="form-control input-sm" placeholder="Search profiles...">
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-list-alt"></i> List of all available profiles</h3>
+                </div>
+                <div class="progress progress-striped active border-space" loading>
+                    <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Profile</th>
+                            <th>Installer</th>
+                            <th>Owner</th>
+                            <th>Subdir</th>
+                            <th>Host</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in profiles | filter:search">
+                            <td>{{$index}}</td>
+                            <td ><a ng-href="#/testbeds/{{item.setup.MAIN.vmhost}}">{{item.profile}}</a></td>
+                            <td>{{item.setup.MAIN.installer}}</td>
+                            <td>{{item.setup.MAIN.owner}}</td>
+                            <td>{{item.setup.MAIN.tbsubdir}}</td>
+                            <td>{{item.setup.MAIN.vmhost}}</td>
+                            <td>{{item.setup.MAIN.description}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-hdd"></i> Disk info from Server</h3>
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-striped table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Filesystem</th>
+                            <th>1K-Blocks</th>
+                            <th>Used</th>
+                            <th>Available</th>
+                            <th>Use</th>
+                            <th>Mounted</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="disk in disks | limitTo: disks.length -1">
+                            <td>{{disk.filesystem}}</td>
+                            <td>{{disk.blocks}}</td>
+                            <td>{{disk.used}}</td>
+                            <td>{{disk.available}}</td>
+                            <td>{{disk.use}}</td>
+                            <td>{{disk.mounted}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+        </div>
+    </div><!-- /.row -->
+
+</div><!-- /#page-wrapper -->

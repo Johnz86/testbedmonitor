@@ -1,0 +1,36 @@
+<div ng-include="'views/navbar.html'"></div>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Hosts status</small></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><i class="glyphicon glyphicon-list-alt"></i> List of Host Servers for Testbeds (Guest Virtual Machines)</div>
+
+                <!-- Table -->
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Hostname</th>
+                        <th>IP Address</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="host in hosts">
+                        <td>{{host.hostname}}</td>
+                        <td>{{host.ipadress}}</td>
+                        <td>{{host.status}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!-- /.row -->
+
+</div><!-- /#page-wrapper -->

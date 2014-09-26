@@ -1,0 +1,92 @@
+<div ng-include="'views/navbar.html'"></div>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>{{testbedId}} <small>({{host[0].ipadress}})</small></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="breadcrumb">
+                <a ng-click="loadData()" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-refresh"></i> Status</a>
+                <a class="btn btn-sm btn-default" ng-href="{{parseIpAdress(host[0].ipadress)}}"><i class="glyphicon glyphicon-flash"></i>Server View Suite</a>
+                <div class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ok"></i>{{host[0].status}}</div>
+                <div class="pull-right col-md-4">
+                    <input ng-model="search" class="form-control input-sm" placeholder="Search virtual machines...">
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">List of Virtual Machines on Server</div>
+                <div class="progress progress-striped active border-space" loading>
+                    <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Hostname</th>
+                            <th>Memory</th>
+                            <th>CPUs</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Profile Name</th>
+                            <th>Owner</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="host in testbeds | limitTo: testbeds.length -1 | filter:search">
+                            <td>{{host.id}}</td>
+                            <td>
+                                <div class="label {{ host.ipaddress == 'undefined '? 'label-danger' : 'label-default'}}" title="{{ host.ipaddress == 'undefined '? 'Host has no ip address specified in /etc/hosts' : host.ipaddress}}" ng-if="!host.link">{{host.hostname}}</div>
+                                <a class="btn btn-primary btn-xs" href="{{host.link}}" ng-if="host.link">{{host.hostname}}</a>
+                            </td>
+                            <td>{{host.memory}}</td>
+                            <td>{{host.cpu}}</td>
+                            <td><span class="label {{statusColor(host.state)}}">{{host.state}}</span></td>
+                            <td>{{host.time}}</td>
+                            <td>{{host.profile}}</td>
+                            <td>{{host.owner}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-heading">List of profiles on Host Server</div>
+                <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Profile Path</th>
+                        <th>Installer</th>
+                        <th>Owner</th>
+                        <th>Subdir</th>
+                        <th>Host</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in profiles">
+                        <td>{{$index}}</td>
+                        <td>{{item.profile}}</td>
+                        <td>{{item.setup.MAIN.installer}}</td>
+                        <td>{{item.setup.MAIN.owner}}</td>
+                        <td>{{item.setup.MAIN.tbsubdir}}</td>
+                        <td>{{item.setup.MAIN.vmhost}}</td>
+                        <td>{{item.setup.MAIN.description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.row -->
+
+</div><!-- /#page-wrapper -->
